@@ -24,11 +24,12 @@ const App = () => {
     const newTasks = tasks.map((task) => {
       if (task.id === id) {
         const updatedTask = { ...task };
-        if (completeStatus === false) {
-          updatedTask.isComplete = true;
-        } else {
-          updatedTask.isComplete = false;
-        }
+        updatedTask.isComplete = !completeStatus;
+        // if (completeStatus === false) {
+        //   updatedTask.isComplete = true;
+        // } else {
+        //   updatedTask.isComplete = false;
+        // }
         return updatedTask;
       } else {
         return { ...task };
