@@ -3,14 +3,15 @@ import PropTypes from 'prop-types';
 import Task from './Task';
 import './TaskList.css';
 
-const TaskList = ({ tasks }) => {
-  const getTaskList =  tasks.map((task) => {
+const TaskList = ({tasks,changeStatus }) => {
+  const getTaskList = tasks.map((task) => {
       return (
         <Task
           key={task.id}
           id={task.id}
           title={task.title}
           isComplete={task.isComplete}
+          changeStatus={changeStatus}
         />
       );
     });
@@ -26,6 +27,7 @@ TaskList.propTypes = {
       isComplete: PropTypes.bool.isRequired,
     })
   ).isRequired,
+  changeStatus: PropTypes.func
 };
 
 export default TaskList;
