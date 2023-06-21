@@ -37,7 +37,30 @@ const App = () => {
 
     const newCompleteStatus = completeStatus ? false : true;
     
-    axios.patch(`${API}/${id}/mark_complete`, { isComplete: newCompleteStatus })
+    axios.patch(`${API}/${id}/mark_complete`, { 'is_complete': newCompleteStatus })
+      .then((result) => {
+        console.log(result.data);
+        const newTasks = tasks.map((task) => {
+          if (task.id === id) {
+            const updatedTask = { ...task, isComplete: newCompleteStatus };
+            // updatedTask.isComplete = !completeStatus;
+            // if (completeStatus === false) {
+            //   updatedTask.isComplete = true;
+            // } else {
+            //   updatedTask.isComplete = false;
+            // }
+            return updatedTask;
+          } else {
+            return { ...task };
+          }
+        });
+        setTasks(newTasks);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+      axios.patch(`${API}/${id}/mark_incomplete`, { 'is_complete': newCompleteStatus })
       .then((result) => {
         console.log(result.data);
         const newTasks = tasks.map((task) => {
